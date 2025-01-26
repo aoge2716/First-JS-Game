@@ -1,11 +1,14 @@
 body{
     margin:0;
     padding:0;
+    position: relative;
     background-color: coral;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
+
 }
 
 #display{
@@ -14,16 +17,46 @@ body{
     background-color: moccasin;
     position: relative;
     display: flex;
-    overflow: hidden;
+    justify-content: center;
+    align-items: flex-end;
+    /* overflow: hidden; */
 }
 
 
-#ball{
-    /* border: 3px black solid; */
+
+.rod{
+    height: 80%;
+    width: 10%;
+    background-color: greenyellow;
+    border: 3px solid black;
+    position: relative;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: flex-end; */
+    
+}
+
+.ball{
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    border-radius: 50%;
     position: absolute;
+    
 }
 
-#track{
-    /* border: 3px red solid; */
+.bar{
+    height: 60%;
+    width: 5%;
+    background-color: blue;
+    border: 3px solid black;
+    position: relative;
+}
+
+.pin{
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
     position: absolute;
 }
