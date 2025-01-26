@@ -1,10 +1,11 @@
-const ball = new Ball();
+const ball = new Ball("#display","rod", "ball");
+const strength = new Ball("#display ", "bar", "pin");
 let intrvl;
 let a = 5, b =2;
-let counter = 0;
 let goingUp = true;
-const maxcount = 15;
+const maxcount = 80; 
 const minInterval = 10;
+
 
 document.addEventListener("keydown",(event)=>{
     switch(event.code){
@@ -13,43 +14,29 @@ document.addEventListener("keydown",(event)=>{
             break;
         case("ArrowDown"):
             ball.moveDown();
-            
             break;
         case ("ArrowLeft"):
-            
             ball.moveLeft();
             break;
         case("ArrowRight"):
             ball.moveRight();
             break;
         case("Space"):
-
-            if(!intrvl){
-                intrvl = setInterval(() => {
-                    if(goingUp){
-                            ball.moveUp();
-                            counter++;
-                            if (counter >= maxcount){
-                                goingUp = false;
-                            }
-                    }else{
-                        ball.moveDown();
-                        counter--;
-                        
-                        if(counter <= 0){
-                            console.log(counter);
-                            goingUp = true;
-                        }
-                    }   
-                }, goingUp ? a:b);
-            }            
+            console.log(100-maxcount,ball.initY);
+            strength.hit(100,10); 
             break;
-        case("Q"):
+        case("KeyQ"):
+            console.log("Q pressed")
             if(intrvl){
                 clearInterval(intrvl);
                 intrvl = null;
             }
-            break
+            ball.hit(100 - strength.positionY,10,true); 
+            if(ball.positionY === strength.positionY){
+                clearInterval(intrvl);
+                intrvl = null;
+            } 
+            break;
     };
 })
 
