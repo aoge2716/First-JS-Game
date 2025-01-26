@@ -1,0 +1,22 @@
+body{
+    margin:0;
+    padding:0;
+}
+
+#board{
+    width: 100vw;
+    height: 100vh;
+    background-color: coral;
+    position: relative;
+    overflow: hidden;
+}
+
+#ball{
+    /* border: 3px black solid; */
+    position: absolute;
+}
+
+#rod{
+    /* border: 3px red solid; */
+    position: absolute;
+}
