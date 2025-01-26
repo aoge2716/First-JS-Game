@@ -1,4 +1,4 @@
-class Platform{
+class Strength{
     constructor(){
         
     }

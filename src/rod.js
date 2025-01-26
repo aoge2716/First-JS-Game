@@ -8,9 +8,9 @@ class Ball{
         this.ballElm = document.querySelector("#ball");
         this.rodElm = document.querySelector("#rod");
         
-        this.addimg(this.rodElm, "/data/flag-pole-bar-free-png.webp");
+        this.addimg(this.rodElm, "../data/flag-pole-bar-free-png.webp");
         // this.addimg(this.rodElm, "data/Jose.jpg");
-        this.addimg(this.ballElm, "/data/fist.webp");
+        this.addimg(this.ballElm, "../data/fist.webp");
         
 
         this.draw();
