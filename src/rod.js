@@ -1,9 +1,11 @@
 class Ball{
-    constructor(elmClass, bar, pin){
+    constructor(elmClass, bar, pin, role){
         // this.ballElm = document.querySelector("#ball");
         // this.rodElm = document.querySelector("#rod");
+        
         this.rodElm = this.create(bar,document.querySelector(elmClass));
         this.ballElm = this.create(pin, this.rodElm);
+        this.role = role;
         
         // get the position of rod Body
         this.rodBody = this.rodElm.getBoundingClientRect();
@@ -13,6 +15,9 @@ class Ball{
         // get the percentage of the center bottom of the main bar
         this.initX = Math.round(((this.rodBody.width/2 - (this.ballElm.offsetWidth/2))/this.rodBody.width*100)*100)/100;
         this.initY = Math.round(((this.rodBody.height - this.ballElm.offsetHeight-1)/this.rodBody.height*100)*100)/100; 
+        
+        
+        console.log("initY ", this.initY)
         this.positionX =  this.initX; 
         this.positionY = this.initY;
         console.log("positionX: ",this.positionX);
@@ -28,7 +33,6 @@ class Ball{
         parent.appendChild(el);
         console.log(parent, el);
         return el;
-        
     }
 
     addimg(target, src, altdesc){
@@ -46,7 +50,7 @@ class Ball{
     }
 
     moveLeft(){
-        this.positionX-=10;
+        this.positionX = Math.round((this.positionX - 10)*100/100);
         console.log(this.positionX,this.positionY);
         this.draw();
     }
@@ -59,37 +63,39 @@ class Ball{
 
     moveDown(){
         
-        this.positionY++;
+        this.positionY = Math.round((this.positionY + 1)* 100/100);
         console.log(this.positionY);
         this.draw();
     }
 
     moveUp(){
-        this.positionY--;
+        this.positionY = Math.round((this.positionY - 1)* 100/100);
         console.log(this.positionY);
         this.draw();
     }
 
-    hit(max,speed,stop){
+    hit(max, speed, stop){
         if(!intrvl){
             intrvl = setInterval(() => {
                 if(goingUp){
-                        if (this.positionY < 100- max){
-                            console.log("passed")
+                        // the highest point the ball will reach
+                        if (this.positionY < 101- max){
                             goingUp = false;
                             
                         }else{
                             this.moveUp();
                         }
                 }else{
-                    if(this.positionY == this.initY){
+                    // the ground 
+                    if(this.positionY > this.initY-1){
                         goingUp = true;
                         if(stop){
                             clearInterval(intrvl);
+                            intrvl = null;
                             window.alert(max+"%");
                         }
                         // clearInterval(intrvl);
-                        intrvl = null;
+                        
                     }else{
                         this.moveDown();
                     }

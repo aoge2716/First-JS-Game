@@ -1,42 +1,67 @@
-const ball = new Ball("#display","rod", "ball");
-const strength = new Ball("#display ", "bar", "pin");
-let intrvl;
-let a = 5, b =2;
-let goingUp = true;
-const maxcount = 80; 
-const minInterval = 10;
+// show home page
+let display = new Display(4,5);
 
 
-document.addEventListener("keydown",(event)=>{
-    switch(event.code){
-        case ("ArrowUp"):
-            ball.moveUp();
-            break;
-        case("ArrowDown"):
-            ball.moveDown();
-            break;
-        case ("ArrowLeft"):
-            ball.moveLeft();
-            break;
-        case("ArrowRight"):
-            ball.moveRight();
-            break;
-        case("Space"):
-            console.log(100-maxcount,ball.initY);
-            strength.hit(100,10); 
-            break;
-        case("KeyQ"):
-            console.log("Q pressed")
-            if(intrvl){
-                clearInterval(intrvl);
-                intrvl = null;
-            }
-            ball.hit(100 - strength.positionY,10,true); 
-            if(ball.positionY === strength.positionY){
-                clearInterval(intrvl);
-                intrvl = null;
-            } 
-            break;
-    };
+
+let x ;
+
+let btn = document.querySelector(".startButton");
+btn.addEventListener("click", ()=>{
+    display.mainPage();
+    let hero = new Character(display,"hero"); 
+    hero.spawn();
+    
+    const meter = new Strength("#display ", "bar", "pin");
+    let intrvl, pressed = false, goingUp =true,speed = 10;
+
+    document.addEventListener("keydown",(event)=>{
+        switch(event.code){
+            case("ArrowLeft"):
+                // most left corner
+                if(hero.currentLocation % display.mapW !== 0){
+                    hero.moveLeft();
+                }
+                console.log("clicked");
+                break;
+            case("ArrowRight"):
+                // most right corner
+                if((hero.currentLocation+1) % display.mapW !== 0){
+                    hero.moveRight();
+                }
+                console.log("right");
+                break;
+            case("ArrowUp"):
+                // most right corner
+                if(hero.currentLocation - display.mapW >= 0){
+                    hero.moveUp();
+                }
+                console.log("Up");
+                break;
+            case("ArrowDown"):
+                // most right corner
+                if(hero.currentLocation + display.mapW < display.size){
+                    hero.moveDown();
+                }
+                console.log("Down");
+                break;
+
+
+            case("Space"):
+                if(!pressed){
+                    meter.hit(speed,false); 
+                    // console.log(Math.floor(Math.random()*(80)+0))
+                    pressed =true;
+                }else{
+                    clearInterval(intrvl);
+                    intrvl = null;
+                    pressed = false;
+                    meter.check()
+                }
+                break;
+        } 
+    })  
+    
+
+    
+        
 })
-
