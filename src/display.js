@@ -1,6 +1,7 @@
 class Display{
     constructor(mapH,mapW){
         this.display = document.querySelector("#display");
+        this.battle = document.querySelector("#battle")
         this.startPage();
         this.mapH = mapH;
         this.mapW = mapW; 
@@ -29,7 +30,7 @@ class Display{
             gap: 0px;
         `); 
         
-
+ 
         for (let i=0; i<this.size; i++){
             const tile = document.createElement("div");
             tile.classList.add("tile");
@@ -38,6 +39,18 @@ class Display{
         }
         
     }
+
+    fightPage(){
+        document.removeEventListener("keydown",moveListener);
+        this.display.setAttribute("style", `
+            display: none;
+        `); 
+        this.battle.classList.toggle("hidden");
+        const meter = new Strength("#battle", "bar", "pin");
+
+        addEventListener("keydown", event=>(bar(event, meter)))
+    }
+
     winPage(){
 
     }

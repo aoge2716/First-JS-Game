@@ -37,15 +37,6 @@ class Strength{
         return el;
     }
 
-    addimg(target, src, altdesc){
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = altdesc;
-        img.style.width = "100%";
-        target.appendChild(img)
-
-    }
-
     draw(elm, y){
         elm.style.left = this.positionX + "%";
         elm.style.top = y + "%";
@@ -66,18 +57,18 @@ class Strength{
     moveDown(){
         
         this.positionY = Math.round((this.positionY + 1)* 100/100);
-        console.log(this.positionY);
+        // console.log(this.positionY);
         this.draw(this.ballElm, this.positionY);
     }
 
     moveUp(){
         this.positionY = Math.round((this.positionY - 1)* 100/100);
-        console.log(this.positionY);
+        // console.log(this.positionY);
         this.draw(this.ballElm, this.positionY);
     }
 
-    hit(speed, stop){
-        if(!intrvl){
+    initHitBar(speed, stop){
+        // if(!intrvl){
             intrvl = setInterval(() => {
                 if(goingUp){
                         // the highest point the ball will reach
@@ -86,8 +77,7 @@ class Strength{
                         }else{
                             goingUp = false;
                         }
-                }
-                else{
+                }else{
                     // the ground 
                     if(this.positionY > this.initY-1){
                         goingUp = true;
@@ -102,7 +92,7 @@ class Strength{
                     }
                 }   
             }, speed);
-        }     
+        // }     
     }
 
     check(){
@@ -112,6 +102,7 @@ class Strength{
             
         }else if (distance <=2){
             console.log("hit", this.targetY, this.positionY, distance);
+            return 
         }else{
             console.log("miss", this.targetY, this.positionY, distance);
         }
