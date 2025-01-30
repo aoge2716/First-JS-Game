@@ -57,7 +57,7 @@ class Character{
         for(let i=0; i<this.maxEnemyAmt; i++){
             const enemy  = document.createElement("div");
             // get random number
-            const chance = Math.floor(Math.random()*100)+1
+            const chance = Math.floor(Math.random()*101)
             // console.log(`Attempt ${i}: Location ${location}, Chance ${chance}`);
             // if random number is lower than the given rate then generate enemy on a empty tile 
             if(chance < this.spawnRate){

@@ -13,8 +13,21 @@ btn.addEventListener("click", startListener);
 
 function startGame(event){
     display.mapH = parseInt(document.getElementById("mapHInput").value);
+    if (display.mapH < 1){
+        display.mapH = 1;
+    }
     display.mapW = parseInt(document.getElementById("mapWInput").value);
-    let spawnRate = parseInt(document.getElementById("spawnRateInput").value)
+    if(display.mapW < 1){
+        display.mapW = 1;
+    }
+    if (display.mapH<=2 && display.mapW<=2){
+        display.mapH = 2;
+        display.mapH = 2;
+    }
+    let spawnRate = parseInt(document.getElementById("spawnRateInput").value);
+    if(spawnRate<1){
+        spawnRate = 1;
+    }
 
     display.mainPage();
     hero = new Character(display,spawnRate); 
