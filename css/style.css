@@ -113,14 +113,14 @@ h1,h2,h3,p,label{
 }
 
 .hero{
-    width: 25%;
-    height: 25%;
+    width: 50%;
+    height: 50%;
     /* background-color: black; */
 }
 
 .enemy{
-    width:25%; 
-    height: 25%;
+    width:50%; 
+    height: 50%;
     /* background-color: red; */
 }
 .item{
