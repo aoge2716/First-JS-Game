@@ -1,34 +1,45 @@
 // show home page
 let display = new Display();
-let intrvl, isHitBarPressed = false, goingUp =true,speed = 10;
+let intrvl, goingUp =true,speed = 10;
 let moveListener, barListener; 
 let startListener = event=>startGame(event);
+let audio = new Audio();
 let hero;
 
-// display.fightPage();
+
+
 
 let btn = document.querySelector(".startButton");
 btn.addEventListener("click", startListener);
-
+audio.forest.play();
 
 function startGame(event){
+    // check for player input with corener cases
     display.mapH = parseInt(document.getElementById("mapHInput").value);
-    if (display.mapH < 1){
+    if (display.mapH < 1 ){
         display.mapH = 1;
+    }else if(display.mapH>30){
+        display.mapH = 30;
     }
     display.mapW = parseInt(document.getElementById("mapWInput").value);
     if(display.mapW < 1){
         display.mapW = 1;
+    }else if(display.mapW>30){
+        display.mapW = 30;
     }
+
     if (display.mapH<=2 && display.mapW<=2){
         display.mapH = 2;
-        display.mapH = 2;
+        display.mapW = 2;
     }
     let spawnRate = parseInt(document.getElementById("spawnRateInput").value);
     if(spawnRate<1){
         spawnRate = 1;
     }
 
+
+    audio.forest.pause()
+    audio.background.play();
     display.mainPage();
     hero = new Character(display,spawnRate); 
     
@@ -47,7 +58,6 @@ function bar(event){
                 console.log("hittin......")
                 clearInterval(intrvl);
                 intrvl = null;
-                isHitBarPressed = false;
                 display.meter.checkHitResult()
             
             break;

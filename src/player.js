@@ -15,14 +15,10 @@ class Character{
         this.maxEnemyAmt =  Math.floor(this.mapsize/2);
         console.log("maxenemyamt "+this.maxEnemyAmt);
 
-        console.log(this.tiles)
+        // console.log(this.tiles)
         this.spawn("hero", this.hero, this.currentLocation);
 
         this.totalEnemy = this.spawn_enemy();
-        if (this.totalEnemy == 0){
-            console.log("no enemy on first try, doing again")
-            this.totalEnemy = this.spawn_enemy();
-        }
         this.spawn_chest();
         console.log("total enemy: ", this.totalEnemy);
     } 
@@ -105,12 +101,14 @@ class Character{
         }else if(this.tiles[location].querySelector(".enemy")!==null){
             console.log("there is enemy");
             this.enemyHealth = 2;
+            audio.found.play();
             display.fightPage();
             // return true;
         }else{
             this.health ++;
             console.log("Potion received, player health: ", this.health);
             let item = this.tiles[location].querySelector(".item");
+            audio.item.play();
             this.tiles[location].removeChild(item);
             display.updateHud(hero.health,hero.totalEnemy);
         }
@@ -136,40 +134,42 @@ class Character{
         // if enemy health is less or equal to zero 
         if(this.enemyHealth < 1){
             console.log("enemy ded")
+            audio.death.play();
             display.deathPage();
-            
             this.die(".enemy",this.currentLocation);
         }
     }
 
 
-
+    move(){
+        audio.stopAudio(audio.move);
+        audio.move.play();
+        this.tiles[this.currentLocation].appendChild(this.hero);
+        this.checkEnemy(this.currentLocation)
+    }
+    
     moveLeft(){
         this.tiles[this.currentLocation].removeChild(this.hero);
         this.currentLocation--;
         // console.log(this.currentLocation)
-        this.tiles[this.currentLocation].appendChild(this.hero);
-        this.checkEnemy(this.currentLocation)
+        this.move();
     }
     moveRight(){
         this.tiles[this.currentLocation].removeChild(this.hero);
         this.currentLocation++;
         // console.log(this.currentLocation)
-        this.tiles[this.currentLocation].appendChild(this.hero);
-        this.checkEnemy(this.currentLocation)
+        this.move();
     }
     moveUp(){
         this.tiles[this.currentLocation].removeChild(this.hero);
         this.currentLocation-=this.mapW;
         // console.log(this.currentLocation,this.mapW)
-        this.tiles[this.currentLocation].appendChild(this.hero);
-        this.checkEnemy(this.currentLocation)
+        this.move();
     }
     moveDown(){
         this.tiles[this.currentLocation].removeChild(this.hero);
         this.currentLocation+=this.mapW;
         // console.log(this.currentLocation)
-        this.tiles[this.currentLocation].appendChild(this.hero);
-        this.checkEnemy(this.currentLocation)
+        this.move();
     }
 }

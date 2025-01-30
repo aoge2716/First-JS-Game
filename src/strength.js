@@ -94,6 +94,7 @@ class Strength{
             console.log("perfect", this.targetY, this.positionY, distance);
             hero.enemyHealth-=2;
             hero.health++;
+            audio.perfect.play();
             display.reactionPage("perfect");
             console.log("PERFECT HIT! heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
             
@@ -101,12 +102,14 @@ class Strength{
         }else if (distance <=2){
             console.log("hit", this.targetY, this.positionY, distance);
             hero.enemyHealth--;
+            audio.hit.play()
             display.reactionPage("hit");
             console.log("heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
            
         }else{
             console.log("miss", this.targetY, this.positionY, distance);
             hero.health--;
+            audio.miss.play()
             display.reactionPage("miss");
             console.log("heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
         }

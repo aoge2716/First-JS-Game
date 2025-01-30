@@ -31,7 +31,7 @@ class Display {
       const tile = document.createElement("div");
       tile.classList.add("tile");
       this.display.appendChild(tile);
-      console.log(tile);
+    //   console.log(tile);
     }
     // display hud
     this.setElementDisplay(this.hud,"flex");
@@ -82,7 +82,7 @@ class Display {
                 document.addEventListener("keydown",moveListener)
             }else{
                 setTimeout(()=>{
-                    console.log("no enemies")
+                    console.log("no enemies");
                     this.winPage();
                 },1000)
                 
@@ -94,6 +94,8 @@ class Display {
   lostPage(){
     this.clearPage();
     this.setElementDisplay(this.lost,"flex");
+    audio.background.pause();
+    audio.lost.play();
     btn = document.querySelector(".agianButton");
     btn.addEventListener("click", ()=>{location.reload()});
     
@@ -102,6 +104,8 @@ class Display {
   
   winPage(){
     this.clearPage();
+    audio.background.pause();
+    audio.win.play();
     this.setElementDisplay(this.win, "flex");    
   }
 
@@ -146,6 +150,7 @@ class Display {
   }
 
   setElementDisplay(element, displaystyle) {
+    // console.log("Page: "+element+"display: "+displaystyle)
     element.setAttribute(
       "style",
       `

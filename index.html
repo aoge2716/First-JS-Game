@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <audio id="missSound" src="data/audio/miss.mp4"></audio>
+    <audio id="hitSound" src="data/audio/hit.mp3"></audio>
+    <audio id="perfectSound" src="data/audio/perfect.mp4"></audio>
+    <audio id="itemSound" src="data/audio/coin.mp3"></audio>
+    <audio id="deathSound" src="data/audio/death.mp4"></audio>
+    <audio id="winSound" src="data/audio/win.mp3" loop></audio>
+    <audio id="backgroundSound" src="data/audio/SaturdayMornings.wav" loop></audio>
+    <audio id="lostSound" src="data/audio/lost.mp3"></audio>
+    <audio id="forestSound" src="data/audio/forest.mp3" loop></audio>
+    <audio id="moveSound" src="data/audio/move.mp3"></audio>
+    <audio id="foundSound" src="data/audio/found.mp4"></audio>
+
+
     <div id="start"  class="setBackground stoneBorder textOutline">
         <H1> Hello Hero </H1>
         <H2>welcome to the world<br>Please Enter the Mapsize and Spawn Rate of The Enemy</h2>
@@ -51,7 +64,7 @@
     </div>
     
 
-    
+    <script src="src/audio.js"> </script>
     <script src="src/player.js"></script>
     <script src="src/strength.js"></script>
     <script src="src/display.js"></script>
