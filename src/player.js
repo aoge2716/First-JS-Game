@@ -1,9 +1,10 @@
 class Character{
-    constructor(map){
+    constructor(map,spawnRate){
         this.mapsize = map.size;
         this.mapH = map.mapH;
         this.mapW = map.mapW;
-        
+
+        this.spawnRate = spawnRate;
         this.health = 2;
         this.enemyHealth = 2; 
         this.hero = document.createElement("div");
@@ -17,7 +18,11 @@ class Character{
         console.log(this.tiles)
         this.spawn("hero", this.hero, this.currentLocation);
 
-        this.totalEnemy = this.spawn_enemy(50);
+        this.totalEnemy = this.spawn_enemy();
+        if (this.totalEnemy == 0){
+            console.log("no enemy on first try, doing again")
+            this.totalEnemy = this.spawn_enemy();
+        }
         this.spawn_chest();
         console.log("total enemy: ", this.totalEnemy);
     } 
@@ -28,13 +33,13 @@ class Character{
     
         const img = document.createElement("img");
         if(type === "hero"){
-            img.src = "./data/knight-crop.gif";
+            img.src = "./data/character/knight.gif";
             img.alt = "Player";
         }else if(type === "enemy"){
-            img.src = "./data/enemy.gif"; 
+            img.src = "./data/character/enemy.gif"; 
             img.alt = "Enemy";
         }else if(type === "item"){
-            img.src = "./data/chest.png";
+            img.src = "./data/character/chest.png";
         }
         img.classList.add("characterImg");
         character.appendChild(img);
@@ -46,7 +51,7 @@ class Character{
 
     
 
-    spawn_enemy(rate){
+    spawn_enemy(){
         let enemyAmt=0;
         // create enemy with max amount of map/2 
         for(let i=0; i<this.maxEnemyAmt; i++){
@@ -55,7 +60,7 @@ class Character{
             const chance = Math.floor(Math.random()*100)+1
             // console.log(`Attempt ${i}: Location ${location}, Chance ${chance}`);
             // if random number is lower than the given rate then generate enemy on a empty tile 
-            if(chance < rate){
+            if(chance < this.spawnRate){
                 let location = this.spawncheck(); 
                 // console.log("get location: ", location);
                 this.spawn("enemy", enemy, location);
@@ -63,7 +68,12 @@ class Character{
                 // console.log("enemy added")
             }   
         }
+         
         // console.log("Enemies successfully spawned:", enemyAmt);
+        if (enemyAmt == 0){
+            console.log("no enemy on first try, doing again")
+            return this.spawn_enemy();
+        }
         return enemyAmt;
     }
 
@@ -88,14 +98,21 @@ class Character{
     }
 
     checkEnemy(location){
-        if(this.tiles[location].querySelector(".enemy")==null){
+        if(this.tiles[location].querySelector(".enemy")===null && 
+            this.tiles[location].querySelector(".item")===null){
             console.log("safe")
             // return false;
-        }else{
+        }else if(this.tiles[location].querySelector(".enemy")!==null){
             console.log("there is enemy");
             this.enemyHealth = 2;
             display.fightPage();
             // return true;
+        }else{
+            this.health ++;
+            console.log("Potion received, player health: ", this.health);
+            let item = this.tiles[location].querySelector(".item");
+            this.tiles[location].removeChild(item);
+            display.updateHud(hero.health,hero.totalEnemy);
         }
     }
 
@@ -104,18 +121,23 @@ class Character{
         // remove character from the tile
         let enemy = this.tiles[location].querySelector(queryType);
         this.tiles[location].removeChild(enemy);
+        this.totalEnemy--;
+        display.updateHud(hero.health,hero.totalEnemy);
+        console.log("total Enemy: ", this.totalEnemy);
         this.enemyHealth = 2;
     }
 
     healthCheck(){
+        // if player health is equal to zero
         if(this.health < 1){
             console.log("hero ded")
-            display.deathPage("death");
-
+            display.lostPage();
         }
+        // if enemy health is less or equal to zero 
         if(this.enemyHealth < 1){
             console.log("enemy ded")
-            display.deathPage("enemydeath");
+            display.deathPage();
+            
             this.die(".enemy",this.currentLocation);
         }
     }

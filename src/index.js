@@ -1,22 +1,30 @@
 // show home page
-let display = new Display(4,4);
+let display = new Display();
 let intrvl, isHitBarPressed = false, goingUp =true,speed = 10;
-let moveListener, barListener;
+let moveListener, barListener; 
+let startListener = event=>startGame(event);
 let hero;
 
 // display.fightPage();
 
 let btn = document.querySelector(".startButton");
-btn.addEventListener("click", ()=>{
-    display.mainPage();
-    hero = new Character(display); 
-    moveListener= event =>(move(hero,event));
-    // display.fightPage();
+btn.addEventListener("click", startListener);
 
-    document.addEventListener("keydown",moveListener)
+
+function startGame(event){
+    display.mapH = parseInt(document.getElementById("mapHInput").value);
+    display.mapW = parseInt(document.getElementById("mapWInput").value);
+    let spawnRate = parseInt(document.getElementById("spawnRateInput").value)
+
+    display.mainPage();
+    hero = new Character(display,spawnRate); 
     
-     
-})
+    display.updateHud(hero.health,hero.totalEnemy);
+    moveListener= event =>(move(hero,event));
+    // display.lostPage();
+
+    document.addEventListener("keydown",moveListener); 
+}
 
 function bar(event){
     if(!display.meter) return;

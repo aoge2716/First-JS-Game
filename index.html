@@ -7,12 +7,48 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <div id="start"  class="setBackground stoneBorder textOutline">
+        <H1> Hello Hero </H1>
+        <H2>welcome to the world<br>Please Enter the Mapsize and Spawn Rate of The Enemy</h2>
+        <div id="inputs"> 
+            <label>Map Height:</label>
+            <input type="number" id="mapHInput" min="2" max="10" value="4"><br>
+
+            <label>Map Width:</label>
+            <input type="number" id="mapWInput" min="2" max="10" value="4"><br>
+
+            <label>Spawn Rate (%):</label>
+            <input type="number" id="spawnRateInput" min="1" max="100" value="20"><br>
+        </div>
+        <button class="startButton"> Start Game</button>
+    </div>
     
-    <div id="display" ></div>
-    <div id="battle" class="setBackground" ></div>
-    <div id="reaction" class="setBackground"></div>
-    <div id="finished"></div>
-    
+    <div id="display" class="setBackground stoneBorder"></div>
+    <div id="battle" class="setBackground fireBorder" ></div>
+    <div id="reaction" class="setBackground fireBorder"></div>
+
+    <div id="win" class="setBackground stoneBorder textOutline">
+        <h1> You won...</h1>
+        <h2> ...was it worth it?</h2>
+        <h2> Go for a walk man, enough killing...</h2>
+    </div>
+
+    <div id="lost" class="setBackground stoneBorder textOutline"> 
+        <h1>this u?<br>🫵🤣</h1>
+        <h2>better luck next time</h2>
+        <button class="agianButton"> 🤣Again?🤣</button>
+
+    </div>
+    <div id="hud" class="woodBorder">
+        <div id="health">
+            <img src="./data/stat/heart.png" alt="">
+            <h2>x3</h2>
+        </div>
+        <div id="enemy">
+            <img src="./data/stat/skull.png" alt="">
+            <h2>x3</h2>
+        </div>
+    </div>
     
 
     
