@@ -35,6 +35,7 @@ body{
     /* overflow: hidden; */
 }
 
+
 .tile{
     width: 100%;
     height: 100%;
@@ -42,34 +43,35 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url("../data/floor.jpg");
+    /* background-image: url("../data/floor.jpg"); */
 }
-
-.rod{
-    height: 80%;
-    width: 10%;
-    background-color: greenyellow;
-    border: 3px solid black;
+.setBackground{
+    width: 80vw;
+    height: 80vh;
+    background-color: moccasin;
     position: relative;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: flex-end; */
-    
+    border: 10px solid transparent;
+    border-image: url("../data/fire-pixel.gif") 10 repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+#battle{
+    background-image:url("../data/stadnoff.webp");
+    display: none;
 }
 
-.ball{
-    height: 20px;
-    width: 20px;
-    background-color: black;
-    border-radius: 50%;
-    position: absolute;
-    
+#reaction{
+    background-image:url("../data/knighthits.webp") ;
+    display: none;
 }
 
 .bar{
-    height: 30%;
-    width: 3%;
-    /* background-color: blue; */
+    height: 40%;
+    width: 20%; 
+    background-color: greenyellow;
     border: 3px solid black;
     position: relative;
     display: flex;
@@ -84,13 +86,26 @@ body{
 }
 
 .hero{
-    width: 50%;
-    height: 50%;
-    background-color: black;
+    width: 25%;
+    height: 25%;
+    /* background-color: black; */
 }
 
 .enemy{
-    width:30px;
-    height: 30px;
-    background-color: red;
+    width:25%; 
+    height: 25%;
+    /* background-color: red; */
+}
+.item{
+    width:50%;
+    height:50%;
+    /* border: 3px solid black; */
+}
+
+.hidden{
+    display:none;
+}
+
+.characterImg{
+    width:100%;
 }
