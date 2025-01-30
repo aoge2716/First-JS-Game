@@ -1,6 +1,6 @@
 # PROJECT BEAT IT 
 
-Welcome to my first JS game! [HEAD TO THE GAME](https://example.com) 
+Welcome to my first JS game! [HEAD TO THE GAME](https://aoge2716.github.io/First-JS-Game/) 
 
 - Description
     - In the game you will play as a knight going around fighting all the enemies 
@@ -31,7 +31,7 @@ Welcome to my first JS game! [HEAD TO THE GAME](https://example.com)
         <br><img src="./data/screenshots/fightpage.png" alt="Screenshot of the start page" width="300"><br>
         - Player have hit the space bar when the red mark is on the green mark
             
-        
+## [ENJOY!](https://aoge2716.github.io/First-JS-Game/) 
 
 
 
