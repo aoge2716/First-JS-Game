@@ -8,31 +8,50 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../data/forest.gif");
+    background-image: url("../data/background/forest.gif");
     background-size: cover; 
     background-position: center;
+}
 
+h1,h2,h3,p,label{
+    color: white;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-align: center;
+}
+
+
+
+#start{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    
+    background-image: url("../data/background/start_standoff.webp");
 }
 
 #display{
-    width: 80vw;
-    height: 80vh;
-    background-color: moccasin;
-    position: relative;
-    border: 10px solid transparent;
-    border-image: url("../data/stone.webp") 30 repeat;
-    
-    
-    /* display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8,1fr);
-    gap: 0px;
-    justify-content: space-around;
-    align-items: flex-end; */
-    
-    /* background-image: url("../data/floor.jpg");
-    background-size: cover */
-    /* overflow: hidden; */
+    display: none;
+}
+
+#battle{
+    background-image:url("../data/background/stadnoff.webp");
+    display: none;
+}
+
+#reaction{
+    display: none;
+}
+
+#win{
+    display: none;
+    flex-direction: column;
+    background-image:url("../data/background/won.webp") 
+}
+
+#lost{
+    display: none;
+    flex-direction: column;
+    background-image:url("../data/background/death.webp") 
 }
 
 
@@ -45,28 +64,36 @@ body{
     align-items: center;
     /* background-image: url("../data/floor.jpg"); */
 }
+
 .setBackground{
     width: 80vw;
     height: 80vh;
     background-color: moccasin;
     position: relative;
-    border: 10px solid transparent;
-    border-image: url("../data/fire-pixel.gif") 10 repeat;
+    /* border: 10px solid transparent;
+    border-image: url("../data/border/fire-pixel.gif") 10 repeat; */
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto 100%;
     justify-content: center;
     align-items: center;
 }
-#battle{
-    background-image:url("../data/stadnoff.webp");
-    display: none;
+
+.stoneBorder{
+    border: 10px solid transparent;
+    border-image: url("../data/border/stone.webp") 30 repeat;
 }
 
-#reaction{
-    background-image:url("../data/knighthits.webp") ;
-    display: none;
+.fireBorder{
+    border: 10px solid transparent;
+    border-image: url("../data/border/fire-pixel.gif") 10 repeat;
 }
+.woodBorder{
+    border: 10px solid transparent;
+    border-image: url("../data/border/wood.png") 10 repeat;
+}
+
+
 
 .bar{
     height: 40%;
@@ -108,4 +135,41 @@ body{
 
 .characterImg{
     width:100%;
+}
+
+#hud{
+    display: none;
+    top: 10px;
+    right: 0px;
+    background-color: goldenrod;
+    color: black;
+    font-size: 20px;
+    justify-content: space-around;
+    align-items: center;
+    height: 5vh;
+    width: 20vw;
+    padding: 10px 15px;
+    z-index: 1000; 
+}
+
+#health, #enemy{
+    display:flex;
+    width: 45%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+img {
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+}
+
+#inputs{
+    display:flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
 }
