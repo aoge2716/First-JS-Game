@@ -1,58 +1,34 @@
 // show home page
 let display = new Display(4,4);
 let intrvl, isHitBarPressed = false, goingUp =true,speed = 10;
-let moveListener, barListener = event=>(bar(event));
+let moveListener, barListener;
+let hero;
 
 // display.fightPage();
 
 let btn = document.querySelector(".startButton");
 btn.addEventListener("click", ()=>{
     display.mainPage();
-    let hero = new Character(display); 
+    hero = new Character(display); 
     moveListener= event =>(move(hero,event));
     // display.fightPage();
 
     document.addEventListener("keydown",moveListener)
-
-
-            // case("Space"):
-            //     // display.startPage();
-            //     // hero.kill(hero.currentLocation);
-            //     if(!pressed){
-            //         const meter = new Strength("body", "bar", "pin");
-            //         if(!pressed){
-            //             meter.hit(speed,false); 
-            //             // console.log(Math.floor(Math.random()*(80)+0))
-            //             pressed =true;
-            //         }else{
-            //             clearInterval(intrvl);
-            //             intrvl = null;
-            //             pressed = false;
-            //             meter.check()
-            //         }
-            //         break;
-            //     }
-                
-    //     } 
-    // })  
+    
      
 })
 
-function bar(event,meter){
+function bar(event){
+    if(!display.meter) return;
+
     switch(event.code){
         case("Space"):
-            if(!isHitBarPressed){
-                console.log("starting hit bar......")
-                meter.initHitBar(speed,false); 
-                // console.log(Math.floor(Math.random()*(80)+0))
-                isHitBarPressed =true;
-            }else{
                 console.log("hittin......")
                 clearInterval(intrvl);
                 intrvl = null;
                 isHitBarPressed = false;
-                meter.check()
-            }
+                display.meter.checkHitResult()
+            
             break;
 
     }

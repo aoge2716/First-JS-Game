@@ -1,75 +1,68 @@
 class Strength{
     constructor(elmClass, bar, pin){
-        // this.ballElm = document.querySelector("#ball");
-        // this.rodElm = document.querySelector("#rod");
-        
-        this.rodElm = this.create(bar,document.querySelector(elmClass));
+        this.parent = elmClass
+        // linking elements
+        this.rodElm = this.create(bar,document.querySelector(this.parent));
         this.ballElm = this.create(pin, this.rodElm);
         this.targetElm = this.create(pin, this.rodElm);
         this.targetElm.style.backgroundColor = "green";
         
         // get the position of rod Body
         this.rodBody = this.rodElm.getBoundingClientRect();
-        // console.log("body: ",this.rodBody);
-        // console.log("ball width: ", this.ballElm.offsetWidth);
+        // console.log("rodBody",this.rodBody )
 
         // get the percentage of the center bottom of the main bar
         this.initX = Math.round(((this.rodBody.width/2 - (this.ballElm.offsetWidth/2))/this.rodBody.width*100)*100)/100;
         this.initY = Math.round(((this.rodBody.height - this.ballElm.offsetHeight-1)/this.rodBody.height*100)*100)/100; 
         this.targetY = Math.floor(Math.random()*(80)+0);
-        
-        console.log("initY ", this.initY)
+        // console.log("initY ", this.initY)
+
         this.positionX =  this.initX; 
         this.positionY = this.initY;
-        console.log("positionX: ",this.positionX);
-        console.log("positionY: "+ this.positionY+"%") // Bottom inside the rod
+        // console.log("positionX: ",this.positionX);
+        // console.log("positionY: "+ this.positionY+"%") 
 
-        this.draw(this.ballElm, this.positionY); 
-        this.draw(this.targetElm, this.targetY);
+        this.placeElement(this.ballElm, this.positionY); 
+        this.placeElement(this.targetElm, this.targetY);        
     }
 
-    create(elmClass, parent){
+    renewTarget(){
+        this.targetY = Math.floor(Math.random()*(80)+0);
+        this.placeElement(this.targetElm, this.targetY); 
+    }
+
+    create(child, parent){
         // create element with given class and append to given parent 
         const el = document.createElement("div");
-        el.classList.add(elmClass);
+        el.classList.add(child);
         parent.appendChild(el);
-        console.log(parent, el);
+        // console.log(parent, el);
         return el;
     }
 
-    draw(elm, y){
+    placeElement(elm, y){
         elm.style.left = this.positionX + "%";
         elm.style.top = y + "%";
     }
 
-    moveLeft(){
-        this.positionX = Math.round((this.positionX - 10)*100/100);
-        console.log(this.positionX,this.positionY);
-        this.draw(this.ballElm, this.positionY);
-    }
-    
-    moveRight(){
-        this.positionX+=10;
-        console.log(this.positionY);
-        this.draw(this.ballElm, this.positionY);
-    }
 
     moveDown(){
         
         this.positionY = Math.round((this.positionY + 1)* 100/100);
         // console.log(this.positionY);
-        this.draw(this.ballElm, this.positionY);
+        this.placeElement(this.ballElm, this.positionY);
     }
 
     moveUp(){
         this.positionY = Math.round((this.positionY - 1)* 100/100);
         // console.log(this.positionY);
-        this.draw(this.ballElm, this.positionY);
+        this.placeElement(this.ballElm, this.positionY);
     }
 
     initHitBar(speed, stop){
         // if(!intrvl){
             intrvl = setInterval(() => {
+                
                 if(goingUp){
                         // the highest point the ball will reach
                         if (this.positionY > 0){
@@ -95,18 +88,34 @@ class Strength{
         // }     
     }
 
-    check(){
+    checkHitResult(){
         let distance = Math.abs(this.targetY-this.positionY)
         if(distance == 0){
             console.log("perfect", this.targetY, this.positionY, distance);
+            hero.enemyHealth-=2;
+            display.reactionPage("perfect");
+            console.log("heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
+            
             
         }else if (distance <=2){
             console.log("hit", this.targetY, this.positionY, distance);
-            return 
+            hero.enemyHealth--;
+            display.reactionPage("hit");
+            console.log("heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
+           
         }else{
             console.log("miss", this.targetY, this.positionY, distance);
+            
+            hero.health--;
+            display.reactionPage("miss");
+            console.log("heroHP: "+hero.health+" enemyHP: "+hero.enemyHealth);
         }
-        return distance;
+
+        setTimeout(() => {
+            hero.healthCheck();
+        }, 1000); 
+
+        
     } 
 
     
