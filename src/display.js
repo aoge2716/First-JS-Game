@@ -22,6 +22,7 @@ class Display {
   }
 
   mainPage() {
+    console.log("mapsize (w h a): ", this.mapW,this.mapH,this.size)
     this.size = this.mapH * this.mapW
     this.clearPage();
     this.setDisplay();
